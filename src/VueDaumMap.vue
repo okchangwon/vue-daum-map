@@ -3,6 +3,10 @@
 </template>
 
 <script>
+  let scriptIsLoaded = false;
+  let scriptIsLoading = false;
+  let scriptElement;
+
   export default {
     name: "VueDaumMap",
     props: {
@@ -20,15 +24,15 @@
       }
     },
     data: () => ({
-      scriptIsLoaded: false,
-      libraryIsLoaded: false,
       map: null
     }),
     mounted () {
-      this.loadLibrary(() => {
-        this.render();
-        this.bindEvents();
-        this.$emit('load', this.map);
+      this.loadScript(() => {
+        daum.maps.load(() => {
+          this.render();
+          this.bindEvents();
+          this.$emit('load', this.map);
+        });
       });
     },
     watch: {
@@ -43,41 +47,75 @@
       }
     },
     methods: {
-      loadLibrary (callback) {
-        if (this.libraryIsLoaded) {
+      loadScript (callback) {
+        if (scriptIsLoaded) {
           if (typeof callback === 'function') {
             callback();
           }
           return;
-        }
+        } else if (scriptIsLoading) {
+          let loaded = false;
+          scriptElement.addEventListener('load', () => {
+            if (loaded) {
+              return;
+            }
 
-        if(!this.scriptIsLoaded) {
-          this.scriptIsLoaded = true;
+            loaded = true;
 
-          const head= document.getElementsByTagName('head')[0];
-          const script= document.createElement('script');
-          const onload = () => {
-            daum.maps.load(() => {
-              this.libraryIsLoaded = true;
+            if (typeof callback === 'function') {
+              callback();
+            }
+          });
+          scriptElement.addEventListener('readystatechange', () => {
+            if (loaded) {
+              return;
+            }
+
+            loaded = true;
+
+            if (this.readyState == 'complete' || this.readyState == 'loaded') {
               if (typeof callback === 'function') {
                 callback();
               }
-            });
-          };
-          const onerror = () => {
-            this.scriptIsLoaded = false;
-          };
-
-          script.type = 'text/javascript';
-          script.onreadystatechange = function () {
-            if (this.readyState == 'complete'
-              || this.readyState == 'loaded') onload();
-          }
-          script.onload = onload;
-          script.onerror = onerror;
-          script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey;
-          head.appendChild(script)
+            }
+          });
+          return;
         }
+
+        scriptIsLoading = true;
+        scriptElement= document.createElement('script');
+
+        const head= document.getElementsByTagName('head')[0];
+        const onload = () => {
+          if (scriptIsLoaded) {
+            return;
+          }
+
+          scriptIsLoaded = true;
+          scriptIsLoading = false;
+          if (typeof callback === 'function') {
+            callback();
+          }
+        };
+        const onerror = () => {
+          scriptIsLoaded = false;
+          scriptIsLoading = false;
+        };
+
+        scriptElement.type = 'text/javascript';
+        scriptElement.onreadystatechange = function () {
+          if (this.readyState == 'complete' || this.readyState == 'loaded') {
+            if (scriptIsLoaded) {
+              return;
+            }
+
+            onload();
+          }
+        }
+        scriptElement.onload = onload;
+        scriptElement.onerror = onerror;
+        scriptElement.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey;
+        head.appendChild(scriptElement)
       },
       render () {
         const options = { //지도를 생성할 때 필요한 기본 옵션
