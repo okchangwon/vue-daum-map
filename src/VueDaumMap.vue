@@ -7,6 +7,20 @@
   let scriptIsLoading = false;
   let scriptElement;
 
+  const MapTypeId = {
+    "ROADMAP": 1,
+    "NORMAL": 1,
+    "SKYVIEW": 2,
+    "HYBRID": 3,
+    "OVERLAY": 4,
+    "ROADVIEW": 5,
+    "TRAFFIC": 6,
+    "TERRAIN": 7,
+    "BICYCLE": 8,
+    "BICYCLE_HYBRID": 9,
+    "USE_DISTRICT": 10
+  };
+
   export default {
     name: "VueDaumMap",
     props: {
@@ -21,6 +35,10 @@
       level: {
         type: Number,
         default: 3
+      },
+      mapTypeId: {
+        type: Number,
+        default: 1
       }
     },
     data: () => ({
@@ -120,7 +138,8 @@
       render () {
         const options = { //지도를 생성할 때 필요한 기본 옵션
           center: new daum.maps.LatLng(this.center.lat, this.center.lng), //지도의 중심좌표.
-          level: this.level //지도의 레벨(확대, 축소 정도)
+          level: this.level, //지도의 레벨(확대, 축소 정도)
+          mapTypeId: this.mapTypeId //지도 타입
         };
 
         this.map = new daum.maps.Map(this.$el, options); //지도 생성 및 객체 리턴
@@ -166,7 +185,8 @@
           lng: latlng.getLng()
         });
       }
-    }
+    },
+    MapTypeId: MapTypeId
   }
 </script>
 

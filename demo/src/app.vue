@@ -8,6 +8,7 @@
 
       :center.sync="center"
       :level.sync="level"
+      :mapTypeId="mapTypeId"
 
       @load="onLoad"
 
@@ -30,9 +31,24 @@
     </vue-daum-map>
 
     <h2>Options</h2>
-    Level : {{level}} <input type="range" min="1" max="14" v-model="level"><br />
-    Latitude : <input type="number" v-model="center.lat" step="0.0001"><br />
-    Longitude : <input type="number" v-model="center.lng" step="0.0001"><br />
+    <table>
+      <colgroup>
+        <col width="60" />
+        <col />
+      </colgroup>
+      <tr>
+        <th>레벨</th>
+        <td><input type="range" min="1" max="14" v-model="level"> {{level}}</td>
+      </tr>
+      <tr>
+        <th>경도</th>
+        <td><input type="number" v-model="center.lat" step="0.0001"></td>
+      </tr>
+      <tr>
+        <th>위도</th>
+        <td><input type="number" v-model="center.lng" step="0.0001"></td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -47,6 +63,7 @@
       appKey: config.appKey,
       center: {lat:33.450701, lng:126.570667},
       level: 3,
+      mapTypeId: VueDaumMap.MapTypeId.NORMAL,
       mapObject: null
     }),
     methods: {

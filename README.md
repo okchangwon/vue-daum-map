@@ -31,6 +31,7 @@ $ npm install vue-daum-map --save
       :appKey="appKey"
       :center.sync="center"
       :level.sync="level"
+      :mapTypeId="mapTypeId"
       @load="onLoad"
       @center_changed=""
       @zoom_start=""
@@ -56,6 +57,7 @@ data: () => ({
     appKey: 'd650a15bea81e28dadb716657ad03d75' // 테스트용 appkey
     center: {lat:33.450701, lng:126.570667}, // 지도의 중심 좌표
     level: 3 // 지도의 레벨(확대, 축소 정도),
+    mapTypeId: VueDaumMap.MapTypeId.NORMAL, // NORMAL: 일반지도, HYBRID: 스카이뷰
     map: null // 지도 객체. 지도가 로드되면 할당됨.
 }),
 
