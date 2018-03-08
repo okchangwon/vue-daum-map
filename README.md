@@ -15,6 +15,7 @@
 - Vue.js 2.x
 - ES2015
 - Webpack 4.x
+- Daum Map SDK 4.0.5
 
 > 하위 버전에서는 테스트하지 않았습니다.
 
