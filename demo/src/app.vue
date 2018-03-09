@@ -38,15 +38,15 @@
       </colgroup>
       <tr>
         <th>레벨</th>
-        <td><input type="range" min="1" max="14" v-model="level"> {{level}}</td>
+        <td><input type="range" min="1" max="14" v-model.number="level"> {{level}}</td>
       </tr>
       <tr>
         <th>경도</th>
-        <td><input type="number" v-model="center.lat" step="0.0001"></td>
+        <td><input type="number" v-model.number="center.lat" step="0.0001"></td>
       </tr>
       <tr>
         <th>위도</th>
-        <td><input type="number" v-model="center.lng" step="0.0001"></td>
+        <td><input type="number" v-model.number="center.lng" step="0.0001"></td>
       </tr>
     </table>
   </div>
