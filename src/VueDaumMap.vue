@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import loadScript from 'load-script';
+  import loadScriptOnce from 'load-script-once';
 
   const MapTypeId = {
     "ROADMAP": 1,
@@ -43,7 +43,7 @@
       map: null
     }),
     mounted () {
-      loadScript('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, () => {
+      loadScriptOnce('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, () => {
         daum.maps.load(() => {
           this.render();
           this.bindEvents();

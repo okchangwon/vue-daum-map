@@ -22,7 +22,7 @@
   "author": "punchto@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "load-script": "^1.0.0"
+    "load-script-once": "^1.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
