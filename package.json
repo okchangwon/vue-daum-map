@@ -5,7 +5,9 @@
   "main": "src/VueDaumMap.vue",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --mode development",
+    "start": "npm run dev",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
