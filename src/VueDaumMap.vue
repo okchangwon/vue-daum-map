@@ -3,9 +3,7 @@
 </template>
 
 <script>
-  let scriptIsLoaded = false;
-  let scriptIsLoading = false;
-  let scriptElement;
+  import loadScript from 'load-script';
 
   const MapTypeId = {
     "ROADMAP": 1,
@@ -45,7 +43,7 @@
       map: null
     }),
     mounted () {
-      this.loadScript(() => {
+      loadScript('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, () => {
         daum.maps.load(() => {
           this.render();
           this.bindEvents();
@@ -65,76 +63,6 @@
       }
     },
     methods: {
-      loadScript (callback) {
-        if (scriptIsLoaded) {
-          if (typeof callback === 'function') {
-            callback();
-          }
-          return;
-        } else if (scriptIsLoading) {
-          let loaded = false;
-          scriptElement.addEventListener('load', () => {
-            if (loaded) {
-              return;
-            }
-
-            loaded = true;
-
-            if (typeof callback === 'function') {
-              callback();
-            }
-          });
-          scriptElement.addEventListener('readystatechange', () => {
-            if (loaded) {
-              return;
-            }
-
-            loaded = true;
-
-            if (this.readyState == 'complete' || this.readyState == 'loaded') {
-              if (typeof callback === 'function') {
-                callback();
-              }
-            }
-          });
-          return;
-        }
-
-        scriptIsLoading = true;
-        scriptElement= document.createElement('script');
-
-        const head= document.getElementsByTagName('head')[0];
-        const onload = () => {
-          if (scriptIsLoaded) {
-            return;
-          }
-
-          scriptIsLoaded = true;
-          scriptIsLoading = false;
-          if (typeof callback === 'function') {
-            callback();
-          }
-        };
-        const onerror = () => {
-          scriptIsLoaded = false;
-          scriptIsLoading = false;
-        };
-
-        scriptElement.type = 'text/javascript';
-        scriptElement.onreadystatechange = function () {
-          if (this.readyState == 'complete' || this.readyState == 'loaded') {
-            if (scriptIsLoaded) {
-              return;
-            }
-
-            onload();
-          }
-        }
-        scriptElement.onload = onload;
-        scriptElement.onerror = onerror;
-        scriptElement.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey;
-        head.appendChild(scriptElement)
-      },
       render () {
         const options = { //지도를 생성할 때 필요한 기본 옵션
           center: new daum.maps.LatLng(this.center.lat, this.center.lng), //지도의 중심좌표.
