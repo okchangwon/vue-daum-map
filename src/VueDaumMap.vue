@@ -36,14 +36,19 @@
       },
       mapTypeId: {
         type: Number,
-        default: 1
+        default: MapTypeId.NORMAL
       }
     },
     data: () => ({
       map: null
     }),
     mounted () {
-      loadScriptOnce('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, () => {
+      loadScriptOnce('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
         daum.maps.load(() => {
           this.render();
           this.bindEvents();
@@ -53,10 +58,18 @@
     },
     watch: {
       level () {
+        if (!this.map) {
+          return;
+        }
+
         this.map.setLevel(this.level);
       },
       center : {
         handler () {
+          if (!this.map) {
+            return;
+          }
+
           this.map.setCenter(new daum.maps.LatLng(this.center.lat, this.center.lng));
         },
         deep: true
