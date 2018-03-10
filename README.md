@@ -77,13 +77,20 @@ methods: {
 ```
 
 ## Props
-prop | type | required | default | description
------------- | ------------ | ------------- | ------------- | -------------
-appKey | String | true | | App key
-center | Object | false | {lat:33.450701, lng:126.570667} | 지도의 중심 좌표
-level | Number | false | 3 | 지도의 레벨(확대, 축소 정도)
-mapTypeId | Number | false | VueDaumMap.MapTypeId.NORMAL | NORMAL: 일반지도<br>HYBRID: 스카이뷰
-libraries | Array | false | [] | 추가로 불러올 라이브러리<br>ex) ['services', 'clusterer', 'drawing']
+prop | type | required | description
+------------ | ------------ | ------------- | -------------
+appKey | String | true | App key
+libraries | Array | false | 추가로 불러올 라이브러리<br>ex) ['services', 'clusterer', 'drawing']
+center | Object | true | {lat:33.450701, lng:126.570667} | 지도의 중심 좌표
+level | Number | false | 지도의 레벨(확대, 축소 정도)
+mapTypeId | Number | false | 일반지도 : VueDaumMap.MapTypeId.NORMAL<br>스카이뷰: VueDaumMap.MapTypeId.HYBRID
+draggable | Boolean | false | 마우스 드래그, 휠, 모바일 터치를 이용한 시점 변경(이동, 확대, 축소) 가능 여부
+scrollwheel | Boolean | false | 마우스 휠, 모바일 터치를 이용한 확대 및 축소 가능 여부
+disableDoubleClick | Boolean | false | 더블클릭 이벤트 및 더블클릭 확대 가능 여부
+disableDoubleClickZoom | Boolean | false | 더블클릭 확대 가능 여부
+projectionId | String | false | 투영법 지정
+tileAnimation | Boolean | false | 지도 타일 애니메이션 설정 여부
+keyboardShortcuts | Boolean or Object | false | 키보드의 방향키와 +, – 키로 지도 이동,확대,축소 가능 여부
 
 ## Events
 event | description

@@ -26,9 +26,13 @@
         type: String,
         required: true
       },
+      libraries: {
+        type: Array,
+        default: () => []
+      },
       center: {
         type: Object,
-        default: () => ({lat:33.450701, lng:126.570667})
+        required: true
       },
       level: {
         type: Number,
@@ -38,10 +42,34 @@
         type: Number,
         default: MapTypeId.NORMAL
       },
-      libraries: {
-        type: Array,
-        default: () => []
+      draggable: {
+        type: Boolean,
+        default: undefined
       },
+      scrollwheel: {
+        type: Boolean,
+        default: undefined
+      },
+      disableDoubleClick: {
+        type: Boolean,
+        default: undefined
+      },
+      disableDoubleClickZoom: {
+        type: Boolean,
+        default: undefined
+      },
+      projectionId: {
+        type: String,
+        default: undefined
+      },
+      tileAnimation: {
+        type: Boolean,
+        default: undefined
+      },
+      keyboardShortcuts: {
+        type: [Boolean, Object],
+        default: undefined
+      }
     },
     data: () => ({
       map: null
@@ -84,7 +112,14 @@
         const options = { //지도를 생성할 때 필요한 기본 옵션
           center: new daum.maps.LatLng(this.center.lat, this.center.lng), //지도의 중심좌표.
           level: this.level, //지도의 레벨(확대, 축소 정도)
-          mapTypeId: this.mapTypeId //지도 타입
+          mapTypeId: this.mapTypeId, //지도 타입
+          draggable: this.draggable,
+          scrollwheel: this.scrollwheel,
+          disableDoubleClick: this.disableDoubleClick,
+          disableDoubleClickZoom: this.disableDoubleClickZoom,
+          projectionId: this.projectionId,
+          tileAnimation: this.tileAnimation,
+          keyboardShortcuts: this.keyboardShortcuts
         };
 
         this.map = new daum.maps.Map(this.$el, options); //지도 생성 및 객체 리턴
