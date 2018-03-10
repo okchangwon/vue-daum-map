@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import VueDaumMap from 'VueDaumMap';
+  import VueDaumMap from 'vue-daum-map';
   import config from './config';
 
   export default {

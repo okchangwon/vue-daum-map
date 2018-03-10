@@ -9,7 +9,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      VueDaumMap: path.resolve(__dirname, 'src/VueDaumMap.vue')
+      'vue-daum-map': path.resolve(__dirname, 'src/VueDaumMap.vue')
     }
   },
   module: {
