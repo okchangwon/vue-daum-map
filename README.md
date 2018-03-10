@@ -33,6 +33,7 @@ $ npm install vue-daum-map --save
       :center.sync="center"
       :level.sync="level"
       :mapTypeId="mapTypeId"
+      :libraries="libraries"
       @load="onLoad"
       @center_changed=""
       @zoom_start=""
@@ -58,7 +59,8 @@ data: () => ({
     appKey: 'd650a15bea81e28dadb716657ad03d75' // 테스트용 appkey
     center: {lat:33.450701, lng:126.570667}, // 지도의 중심 좌표
     level: 3 // 지도의 레벨(확대, 축소 정도),
-    mapTypeId: VueDaumMap.MapTypeId.NORMAL, // NORMAL: 일반지도, HYBRID: 스카이뷰
+    mapTypeId: VueDaumMap.MapTypeId.NORMAL, // 맵 타입
+    libraries: [], // 추가로 불러올 라이브러리
     map: null // 지도 객체. 지도가 로드되면 할당됨.
 }),
 
@@ -73,3 +75,31 @@ methods: {
     }
 }
 ```
+
+## Props
+prop | type | required | default | description
+------------ | ------------ | ------------- | ------------- | -------------
+appKey | String | true | | App key
+center | Object | false | {lat:33.450701, lng:126.570667} | 지도의 중심 좌표
+level | Number | false | 3 | 지도의 레벨(확대, 축소 정도)
+mapTypeId | Number | false | VueDaumMap.MapTypeId.NORMAL | NORMAL: 일반지도<br>HYBRID: 스카이뷰
+libraries | Array | false | [] | 추가로 불러올 라이브러리<br>ex) ['services', 'clusterer', 'drawing']
+
+## Events
+event | description
+------------ | -------------
+load | 다음 맵이 로드된 직후 발생한다.
+center_changed | 중심 좌표가 변경되면 발생한다.
+zoom_start | 확대 수준이 변경되기 직전 발생한다.
+zoom_changed | 확대 수준이 변경되면 발생한다.
+bounds_changed | 지도 영역이 변경되면 발생한다.
+click | 지도를 클릭하면 발생한다.
+dblclick | 지도를 더블클릭하면 발생한다.
+rightclick | 지도를 마우스 오른쪽 버튼으로 클릭하면 발생한다.
+mousemove | 지도에서 마우스 커서를 이동하면 발생한다.
+dragstart | 드래그를 시작할 때 발생한다.
+drag | 드래그를 하는 동안 발생한다.
+dragend | 드래그가 끝날 때 발생한다.
+idle | 중심 좌표나 확대 수준이 변경되면 발생한다.<br>단, 애니메이션 도중에는 발생하지 않는다.
+tilesloaded | 확대수준이 변경되거나 지도가 이동했을때 타일 이미지 로드가 모두 완료되면 발생한다.
+maptypeid_changed | 지도 기본 타일(일반지도, 스카이뷰, 하이브리드)이 변경되면 발생한다.

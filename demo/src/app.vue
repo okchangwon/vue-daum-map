@@ -9,6 +9,7 @@
       :center.sync="center"
       :level.sync="level"
       :mapTypeId="mapTypeId"
+      :libraries="libraries"
 
       @load="onLoad"
 
@@ -64,6 +65,7 @@
       center: {lat:33.450701, lng:126.570667},
       level: 3,
       mapTypeId: VueDaumMap.MapTypeId.NORMAL,
+      libraries: [],
       mapObject: null
     }),
     methods: {

@@ -28,7 +28,7 @@
       },
       center: {
         type: Object,
-        default: {lat:33.450701, lng:126.570667}
+        default: () => ({lat:33.450701, lng:126.570667})
       },
       level: {
         type: Number,
@@ -37,13 +37,17 @@
       mapTypeId: {
         type: Number,
         default: MapTypeId.NORMAL
-      }
+      },
+      libraries: {
+        type: Array,
+        default: () => []
+      },
     },
     data: () => ({
       map: null
     }),
     mounted () {
-      loadScriptOnce('//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' + this.appKey, (err) => {
+      loadScriptOnce(`//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${this.appKey}&libraries=${this.libraries.join(',')}`, (err) => {
         if (err) {
           console.error(err);
           return;
