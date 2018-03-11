@@ -19,6 +19,23 @@
     "USE_DISTRICT": 10
   };
 
+  const EVENTS = [
+    'center_changed',
+    'zoom_start',
+    'zoom_changed',
+    'bounds_changed',
+    'click',
+    'dblclick',
+    'rightclick',
+    'mousemove',
+    'dragstart',
+    'drag',
+    'dragend',
+    'idle',
+    'tilesloaded',
+    'maptypeid_changed'
+  ];
+
   export default {
     name: "VueDaumMap",
     props: {
@@ -36,11 +53,11 @@
       },
       level: {
         type: Number,
-        default: 3
+        default: undefined
       },
       mapTypeId: {
         type: Number,
-        default: MapTypeId.NORMAL
+        default: undefined
       },
       draggable: {
         type: Boolean,
@@ -126,23 +143,11 @@
       },
       bindEvents () {
         const handlers = {
-          center_changed: null,
-          zoom_start: null,
-          zoom_changed: null,
           bounds_changed: this.onChange,
-          click: null,
-          dblclick: null,
-          rightclick: null,
-          mousemove: null,
-          dragstart: null,
-          drag: null,
-          dragend: null,
-          idle: this.onChange,
-          tilesloaded: null,
-          maptypeid_changed: null
+          idle: this.onChange
         };
 
-        for (let event in handlers) {
+        for (let event of EVENTS) {
           this.bindEvent(event, handlers[event]);
         }
       },
