@@ -32,7 +32,7 @@ module.exports = {
             presets: ['env']
           }
         }
-      }
+      },
     ]
   },
   devServer: {

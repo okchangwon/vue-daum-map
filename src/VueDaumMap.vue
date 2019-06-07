@@ -92,18 +92,17 @@
       map: null
     }),
     mounted () {
-      loadScriptOnce(`//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${this.appKey}&libraries=${this.libraries.join(',')}`, (err) => {
-        if (err) {
+      loadScriptOnce(`//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${this.appKey}&libraries=${this.libraries.join(',')}`)
+        .then(() => {
+          daum.maps.load(() => {
+            this.render();
+            this.bindEvents();
+            this.$emit('load', this.map);
+          });
+        })
+        .catch(err => {
           console.error(err);
-          return;
-        }
-
-        daum.maps.load(() => {
-          this.render();
-          this.bindEvents();
-          this.$emit('load', this.map);
         });
-      });
     },
     watch: {
       level () {
