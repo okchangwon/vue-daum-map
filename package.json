@@ -17,7 +17,10 @@
     "vuejs",
     "vue",
     "daum",
-    "map"
+    "map",
+    "kakao",
+    "kakao-map",
+    "daum-map"
   ],
   "author": "punchto@gmail.com",
   "license": "ISC",
