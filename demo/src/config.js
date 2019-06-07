@@ -1,3 +1,3 @@
 export default {
-  appKey: "d650a15bea81e28dadb716657ad03d75"
+  appKey: "47879d6769ec503fce72d3a90d27b2c5"
 }
