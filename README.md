@@ -20,14 +20,16 @@
 > 하위 버전에서는 테스트하지 않았습니다.
 
 ## 설치
-```
+```bash
 $ npm install vue-daum-map --save
+# 혹은
+$ yarn add vue-daum-map
 ```
 
 ## 컴포넌트 사용 예제
 
 ### 템플릿 예제
-```
+```vue
 <vue-daum-map
       :appKey="appKey"
       :center.sync="center"
@@ -49,29 +51,35 @@ $ npm install vue-daum-map --save
       @idle=""
       @tilesloaded=""
       @maptypeid_changed=""
-      style="width:500px;height:400px;">
-    </vue-daum-map>
+      style="width:500px;height:400px;"/>
+```
+
+```js
+import VueDaumMap from 'vue-daum-map'
 ```
 
 ### 속성 예제
-```
-data: () => ({
-    appKey: 'd650a15bea81e28dadb716657ad03d75' // 테스트용 appkey
-    center: {lat:33.450701, lng:126.570667}, // 지도의 중심 좌표
-    level: 3 // 지도의 레벨(확대, 축소 정도),
-    mapTypeId: VueDaumMap.MapTypeId.NORMAL, // 맵 타입
-    libraries: [], // 추가로 불러올 라이브러리
-    map: null // 지도 객체. 지도가 로드되면 할당됨.
-}),
-
+```js
+{
+    data: () => ({
+        appKey: 'd650a15bea81e28dadb716657ad03d75', // 테스트용 appkey
+        center: {lat:33.450701, lng:126.570667}, // 지도의 중심 좌표
+        level: 3, // 지도의 레벨(확대, 축소 정도),
+        mapTypeId: VueDaumMap.MapTypeId.NORMAL, // 맵 타입
+        libraries: [], // 추가로 불러올 라이브러리
+        map: null // 지도 객체. 지도가 로드되면 할당됨.
+    }),
+}
 ```
 
 ### 메서드 예제
-```
-methods: {
-    // 지도가 로드 완료되면 load 이벤트 발생
-    onLoad (map) {
-        this.map = map
+```js
+{
+    methods: {
+        // 지도가 로드 완료되면 load 이벤트 발생
+        onLoad (map) {
+            this.map = map
+        }
     }
 }
 ```
