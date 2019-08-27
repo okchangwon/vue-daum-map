@@ -13,16 +13,25 @@
     "type": "git",
     "url": "https://github.com/okchangwon/vue-daum-map"
   },
+  "bugs": {
+    "url": "https://github.com/okchangwon/vue-daum-map/issues"
+  },
+  "homepage": "https://github.com/okchangwon/vue-daum-map",
   "keywords": [
-    "vuejs",
     "vue",
-    "daum",
+    "vuejs",
     "map",
     "kakao",
+    "daum",
     "kakao-map",
-    "daum-map"
+    "daum-map",
+    "vuekakaomap",
+    "vuedaummap",
+    "vue-kakao-map"
   ],
-  "author": "punchto@gmail.com",
+  "author": {
+    "email": "punchto@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {
     "load-script-once": "^2.0.1"
