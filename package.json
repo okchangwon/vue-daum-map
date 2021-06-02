@@ -1,6 +1,6 @@
 {
   "name": "vue-daum-map",
-  "version": "1.0.15",
+  "version": "1.1.0",
   "description": "",
   "main": "src/VueDaumMap.vue",
   "scripts": {
@@ -32,6 +32,12 @@
   "author": {
     "email": "punchto@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "ChungHyun Lee",
+      "email": "codemaniac73@gmail.com"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
     "load-script-once": "^2.0.1"

@@ -6,7 +6,7 @@
 
 ## 참고 사항
 - 중심좌표와 레벨값은 sync 됩니다.
-- 지도가 로드되면 load 이벤트가 발생하며, 파라미터로 넘어오는 map 객체를 통해 지도를 직접 컨트롤 가능합니다.
+- 지도가 로드되면 load 이벤트가 발생하며, 파라미터로 넘어오는 map 객체를 통해 지도를 직접 컨트롤 가능합니다. 또한 daum 객체를 넘겨 사용자가 임의로 객체를 생성할 수 있도록 한다.
 - 지도에서 발생하는 [Events](http://apis.map.daum.net/web/documentation/#Map_Events) 들은 모두 그대로 내어주고 있으므로 필요시 바인딩하여 사용하시면 됩니다.
 - appKey 는 [다음 지도  Web API 가이드](http://apis.map.daum.net/web/guide/#ready)를 참고하여 새로 발급받아 사용하세요.
 
@@ -67,7 +67,8 @@ import VueDaumMap from 'vue-daum-map'
         level: 3, // 지도의 레벨(확대, 축소 정도),
         mapTypeId: VueDaumMap.MapTypeId.NORMAL, // 맵 타입
         libraries: [], // 추가로 불러올 라이브러리
-        map: null // 지도 객체. 지도가 로드되면 할당됨.
+        map: null, // 지도 객체. 지도가 로드되면 할당됨.
+        daum: null, // 다음 API 객체. 지도가 로드되면 할당됨.
     }),
 }
 ```
@@ -77,8 +78,9 @@ import VueDaumMap from 'vue-daum-map'
 {
     methods: {
         // 지도가 로드 완료되면 load 이벤트 발생
-        onLoad (map) {
-            this.map = map
+        onLoad (map, daum) {
+            this.map = map;
+            this.daum = daum;
         }
     }
 }
