@@ -97,7 +97,7 @@
           daum.maps.load(() => {
             this.render();
             this.bindEvents();
-            this.$emit('load', this.map);
+            this.$emit('load', this.map, daum);
           });
         })
         .catch(err => {
