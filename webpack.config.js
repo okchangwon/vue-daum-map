@@ -39,6 +39,7 @@ module.exports = {
     contentBase: path.join(__dirname, "demo"),
     publicPath: '/dist',
     compress: true,
+    open: true,
     port: 8086
   }
 };
